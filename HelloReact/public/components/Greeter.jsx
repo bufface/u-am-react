@@ -18,9 +18,6 @@ var Greeter = React.createClass({
   },
 
   handleNewData: function (data) {
-    var name = data.name || this.state.name;
-    var message = data.message || this.state.message;
-    
     this.setState(data);
   },
 
