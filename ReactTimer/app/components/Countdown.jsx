@@ -20,7 +20,6 @@ var Countdown = React.createClass({
   },
   startTimer: function () {
     this.timer = setInterval(() => {
-      console.log('fired');
       var newCount = this.state.count - 1;
       this.setState({
         count: newCount >= 0 ? newCount : 0
