@@ -19,7 +19,16 @@ var reducer = (state = stateDefault, action) => {
       return state;;
   }
 }
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
+
+// Subscribe to changes
+store.subscribe(() => {
+  var state = store.getState();
+
+  document.getElementById('app').innerHTML = state.searchText;
+});
 
 console.log('currentState', store.getState());
 
@@ -28,4 +37,12 @@ store.dispatch({
   searchText: 'Some random text'
 });
 
-console.log('Should change searchText prop', store.getState());
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Other random text'
+});
+
+store.dispatch({
+  type: 'CHANGE_SEARCH_TEXT',
+  searchText: 'Some else random text'
+});
