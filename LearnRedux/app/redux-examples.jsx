@@ -2,7 +2,16 @@ var redux = require('redux');
 
 console.log('Starting redux example');
 
-var reducer = (state = { name: 'Anonymous' }, action) => {
+var stateDefaults = {
+  name: 'Anonymous',
+  hobbies: [],
+  movies: []
+}
+
+var nextHobbyId = 1;
+var nextMovieId = 1;
+
+var reducer = (state = stateDefaults, action) => {
   // state = state || { name: 'Anonymous' };
 
   switch (action.type) {
@@ -11,6 +20,29 @@ var reducer = (state = { name: 'Anonymous' }, action) => {
         ...state,
         name: action.name
       }
+    case 'ADD_HOBBY':
+      return {
+        ...state,
+        hobbies: [
+          ...state.hobbies,
+          {
+            id: nextHobbyId++,
+            hobby: action.hobby
+          }
+        ]
+      }
+    case 'ADD_MOVIE':
+      return {
+        ...state,
+        movies: [
+          ...state.movies,
+          {
+            id: nextMovieId ++,
+            title: action.name,
+            genre: action.genre
+          }
+        ]
+      }  
     default:
       return state;  
   }
@@ -25,6 +57,8 @@ var unsubscribe = store.subscribe(() => {
 
   console.log('Name is: ', state.name);
   document.getElementById('app').innerHTML = state.name;
+
+  console.log('New State: ', store.getState());
 });
 // unsubscribe();
 
@@ -37,6 +71,29 @@ store.dispatch({
 });
 
 store.dispatch({
+  type: 'ADD_HOBBY',
+  hobby: 'Running'
+});
+
+store.dispatch({
   type: 'CHANGE_NAME',
   name: 'Other random text'
+});
+
+store.dispatch({
+  type: 'ADD_MOVIE',
+  title: 'Termiator',
+  genre: 'Fiction'
+});
+
+store.dispatch({
+  type: 'ADD_MOVIE',
+  title: 'Termiator II',
+  genre: 'Fiction'
+});
+
+store.dispatch({
+  type: 'ADD_MOVIE',
+  title: 'Happie Feed',
+  genre: '3D'
 });
