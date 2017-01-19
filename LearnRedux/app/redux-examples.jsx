@@ -31,6 +31,11 @@ var reducer = (state = stateDefaults, action) => {
           }
         ]
       }
+    case 'REMOVE_HOBBY':
+      return {
+        ...state,
+        hobbies: state.hobbies.filter(hobby => hobby.id !== action.id)
+      }  
     case 'ADD_MOVIE':
       return {
         ...state,
@@ -38,10 +43,15 @@ var reducer = (state = stateDefaults, action) => {
           ...state.movies,
           {
             id: nextMovieId ++,
-            title: action.name,
+            title: action.title,
             genre: action.genre
           }
         ]
+      }
+    case 'REMOVE_MOVIE':
+      return {
+        ...state,
+        movies: state.movies.filter(movie => movie.id !== action.id)
       }  
     default:
       return state;  
@@ -76,6 +86,16 @@ store.dispatch({
 });
 
 store.dispatch({
+  type: 'ADD_HOBBY',
+  hobby: 'Walking'
+});
+
+store.dispatch({
+  type: 'REMOVE_HOBBY',
+  id: 2
+});
+
+store.dispatch({
   type: 'CHANGE_NAME',
   name: 'Other random text'
 });
@@ -88,7 +108,7 @@ store.dispatch({
 
 store.dispatch({
   type: 'ADD_MOVIE',
-  title: 'Termiator II',
+  title: 'Back To The Future',
   genre: 'Fiction'
 });
 
@@ -96,4 +116,9 @@ store.dispatch({
   type: 'ADD_MOVIE',
   title: 'Happie Feed',
   genre: '3D'
+});
+
+store.dispatch({
+  type: 'REMOVE_MOVIE',
+  id: 3
 });
