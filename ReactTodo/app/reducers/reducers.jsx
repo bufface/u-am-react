@@ -15,7 +15,7 @@ export var showCompletedReducer = (state = false, action) => {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
     default:
-      state;
+      return state;
   };
 };
 
