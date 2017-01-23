@@ -1,5 +1,6 @@
 var React = require('react');
-var TodoList = require('TodoList');
+
+import TodoList from 'TodoList';
 var TodoForm = require('TodoForm');
 var TodoSearch = require('TodoSearch');
 var TodoAPI = require('TodoAPI');
