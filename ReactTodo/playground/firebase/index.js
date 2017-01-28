@@ -23,15 +23,8 @@ firebaseRef.set({
   }
 });
 
-// firebaseRef.update({
-//   'app/name': 'Todo Application',
-//   'user/name': 'Jen'
-// });
-
-firebaseRef.child('app').update({
-  name: 'Todo Application',
+firebaseRef.update({
+  isRunning: null
 });
 
-firebaseRef.child('user').update({
-  name: 'Jen',
-});
+firebaseRef.child('user/age').remove();
