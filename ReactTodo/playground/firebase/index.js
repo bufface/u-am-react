@@ -23,8 +23,14 @@ firebaseRef.set({
   }
 });
 
-firebaseRef.update({
-  isRunning: null
+firebaseRef.child('user').on('value', (snapshot) => {
+  console.log('User ref changed', snapshot.val());
 });
 
-firebaseRef.child('user/age').remove();
+firebaseRef.child('user').update({
+  name: 'Mike'
+});
+
+firebaseRef.child('app').update({
+  name: 'Somthing else!'
+});
