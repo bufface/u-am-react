@@ -23,14 +23,16 @@ firebaseRef.set({
   }
 });
 
-firebaseRef.child('user').on('value', (snapshot) => {
-  console.log('User ref changed', snapshot.val());
+var todosRef = firebaseRef.child('todos');
+
+todosRef.on('child_added', (snapshot) => {
+  console.log('New todo added', snapshot.key, snapshot.val());
 });
 
-firebaseRef.child('user').update({
-  name: 'Mike'
+todosRef.push({
+  text: 'Todo 1'
 });
 
-firebaseRef.child('app').update({
-  name: 'Somthing else!'
+todosRef.push({
+  text: 'Todo 2'
 });
