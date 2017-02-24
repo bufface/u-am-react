@@ -17,7 +17,7 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
-  it('should generate toogle show completed action', () => {
+  it('should generate toggle show completed action', () => {
     var action = {
       type: 'TOGGLE_SHOW_COMPLETED'
     };
@@ -84,6 +84,23 @@ describe('Actions', () => {
     };
     var res = actions.updateTodo(action.id, action.updates);
 
+    expect(res).toEqual(action);
+  });
+
+  it('should generate login action object', () => {
+    const action = {
+      type: 'LOGIN',
+      uid: '123abc'
+    };
+    const res = actions.login(action.uid);
+
+    expect(res).toEqual(action);
+  });
+
+  it('should generate logout action object', () => {
+    const action = { type: 'LOGOUT' };
+    const res = actions.logout();
+    
     expect(res).toEqual(action);
   });
 
