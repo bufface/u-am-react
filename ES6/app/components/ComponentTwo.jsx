@@ -1,5 +1,49 @@
 import React from 'react';
 
+var isAdmin = true;
+var adminComponent = (Component) => {
+  return class Admin extends React.Component {
+    render() {
+      if (isAdmin) {
+        return (
+          <div className="callout secondary">
+            <p className="alert label">Provate admin information</p>
+            <Component {...this.props} />
+          </div>
+        );
+      } else {
+        return null;
+      }
+
+    }
+  }
+};
+
+/*var isAdmin = true;
+var adminComponent = (Component) => {
+  return class Admin extends Component {
+    componentDidUpdate() {
+      console.log('Admin component did update');
+      if (super.componentDidUpdate) {
+        super.componentDidUpdate();
+      }
+    }
+    render() {
+      if (isAdmin) {
+        return (
+          <div className="callout secondary">
+            <p className="alert label">Provate admin information</p>
+            {super.render()}
+          </div>
+        );
+      } else {
+        return null;
+      }
+
+    }
+  }
+};*/
+
 class ComponentTwo extends React.Component {
   constructor(props) {
     super(props);
@@ -36,4 +80,4 @@ ComponentTwo.propTypes = {
   count: React.PropTypes.number
 };
 
-export default ComponentTwo;
+export default adminComponent(ComponentTwo);
